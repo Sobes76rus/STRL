@@ -4,7 +4,7 @@ import rospy
 from std_msgs.msg import String
 
 def talker():
-  pub = rospy.Publisher('node_manager_start', String, queue_size=10)
+  pub = rospy.Publisher('node_manager_stop', String, queue_size=10)
   rospy.init_node('talk', anonymous=True)
   rate = rospy.Rate(0.1)
   while not rospy.is_shutdown():
