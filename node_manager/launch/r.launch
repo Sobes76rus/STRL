@@ -1,4 +1,5 @@
 <launch>
-  <node pkg="robots" name="t1" type="r.py"/>
-  <node pkg="robots" name="t2" type="r.py"/>
+  <node pkg="robots" name="t1" type="runner.py">
+    <param name="~module" type="str" value="r"/>
+  </node>
 </launch>

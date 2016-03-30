@@ -5,7 +5,7 @@ from std_msgs.msg import String
 import rospy
 
 from config import config
-import world_controller
+from world import world_controller
 
 
 worldIDsToStart = []
@@ -37,6 +37,7 @@ def run():
     del worldIDsToStart[:]
     del worldIDsToStop[:]
 
+    world_controller.run()
     rate.sleep()
 
 
