@@ -9,14 +9,14 @@ config ={
   'root': 'src',
   'robots': {
     'root': 'robots',
+    'runner': 'runner.py',
+
     'config': 'config.xml',
     'launch': ['r', 's', 't'],
     'rate': {
       'r': 100,
-      's': 25,
+      's': 15,
       't': 3
     }
   }
 }
-
-

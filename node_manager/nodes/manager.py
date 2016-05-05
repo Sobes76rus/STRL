@@ -4,9 +4,9 @@
 from std_msgs.msg import String
 import rospy
 
+import node_manager
 from config import config
 from world import world_controller
-
 
 worldIDsToStart = []
 worldIDsToStop = []

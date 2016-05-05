@@ -57,6 +57,7 @@ catkin_python_setup()
 #   Service1.srv
 #   Service2.srv
   Num.srv
+  Req.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -102,8 +103,8 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES node_manager
+  # INCLUDE_DIRS src
+  #  LIBRARIES node_manager config
   CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )

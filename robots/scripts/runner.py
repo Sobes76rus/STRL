@@ -6,7 +6,7 @@ from node_manager.srv import *
 
 
 def ready(req):
-  return NumResponse(2)
+  return NumResponse(-7)
 
 
 def init():
@@ -18,9 +18,8 @@ def init():
 
 init()
 
-rospy.set_param('%s/module'%rospy.get_name(), 'scripts/robot1/r.py')
-filename = rospy.get_param('%s/module' % rospy.get_name())
-rospy.delete_param('%s/module' % rospy.get_name())
+filename = rospy.get_param('~module')
+rospy.delete_param('~module')
 
 (directory, _) = os.path.split(__file__)
 filename = os.path.join(directory, '..', filename)

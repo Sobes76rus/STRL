@@ -1,17 +1,20 @@
 from roslaunch.scriptapi import ROSLaunch
-from roslaunch.core import Node
+from pack.node import Node
 from std_msgs.msg import String
 import rospy
 
 import converter, os.path
 from config import config
-
+from pack.world import World
 
 nodes = []
 worldID = 0
 robotID = 0
 
+
 def launch(world, world_id):
+  return World(ident=world_id, json=world)
+
   global nodes, worldID, robotID
   nodes, worldID, robotID = [], world_id, 0
 
@@ -58,7 +61,6 @@ def launchRobot(robot):
 
 def launchFile(path, filepath, filename, robot):
   rospy.loginfo(filepath + " " + robot)
-  node = Node(package=config['robots']['root'], node_type='runner.py',
-      filename=filepath, name=filename, namespace="%s/%s"%(worldID, robotID))
-  rospy.set_param('%s%s/%s'%(node.namespace, node.name, 'module'), filepath)
+  node = Node(filename=filepath, name=filename, namespace="%s/%s"%(worldID, robotID),
+      params=[('module', filepath)])
   nodes.append(node)

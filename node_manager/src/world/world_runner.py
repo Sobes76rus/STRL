@@ -27,7 +27,6 @@ def run(world):
   rospy.loginfo('%s %s' % (world['tick'], conf['tick']))
   
 
-
 def run_node(node, rate, conf): 
   percent = rate * conf['tick'] / conf['maxrate']
   if rate * (conf['tick'] - 1) / conf['maxrate'] == percent: return
@@ -36,5 +35,3 @@ def run_node(node, rate, conf):
   rospy.wait_for_service('%s%s' % (node.namespace, 'ready'))
   ready = rospy.ServiceProxy('%s%s' % (node.namespace, 'ready'), Num)
   rospy.loginfo(ready())
-
-
