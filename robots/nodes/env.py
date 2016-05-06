@@ -2,12 +2,17 @@
 
 import rospy
 from node_manager.srv import *
+from node_manager.msg import *
 
 
-def compute(req):
-  return ReqResponse(max(req.x + req.vx, 100))
+def execute(req):
+  r = Properties()
+  r.position.x = 10
+  return EnvExecuteResponse(r)
 
 
 rospy.init_node('env')
-serv = rospy.Service('compute', Req, compute)
+
+rospy.Service('execute', EnvExecute, execute)
+
 rospy.spin()

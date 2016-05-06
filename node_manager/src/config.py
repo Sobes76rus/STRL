@@ -1,20 +1,20 @@
 config ={
   'config': {
     'name': 'NodeManager',
-    'start': 'nodeManager_Start',
-    'stop': 'nodeManager_Stop',
-    'rate': 2
+    'create_world': 'create_world',
+    'destroy_world': 'destroy_world',
   },
 
   'root': 'src',
   'robots': {
     'root': 'robots',
     'runner': 'runner.py',
+    'env': 'env.py',
 
     'config': 'config.xml',
     'launch': ['r', 's', 't'],
     'rate': {
-      'r': 100,
+      'r': 5,
       's': 15,
       't': 3
     }

@@ -1,9 +1,15 @@
 {
-  "robot": [
+  "id": "2",
+  "objects": [
     {
+      "active": true,
+      "type": "2",
       "name": "2",
-      "x": 100,
-      "y": 0
+      "geometry": {
+        "type": "circle",
+        "position": [100.0, 0.0],
+        "radius": 5
+      }
     }
   ]
 }

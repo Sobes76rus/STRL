@@ -1,44 +1,49 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from std_msgs.msg import String
 import rospy
+from std_msgs.msg import String
 
 import node_manager
 from config import config
-from world import world_controller
-
-worldIDsToStart = []
-worldIDsToStop = []
+from world import World
 
 
-# ID (String) - Идентификатор мира, который следует промоделировать
-def start(ID):
-  rospy.loginfo("start: %s", ID.data)
-  worldIDsToStart.append(ID.data)
+worlds = {}
+create_ids = []
+destroy_ids = []
 
 
-# ID (String) - Идентификатор мира, который следует прервать
-def stop(ID):
-  rospy.loginfo("stop: %s", ID.data)
-  worldIDsToStop.append(ID.data)
+def create_world(ID):
+  if ID.data in worlds: destroy_world(ID)
+  rospy.loginfo("create: %s", ID.data)
+  worlds[ID.data] = World(ID=ID.data)
+
+
+def destroy_world(ID):
+  if ID.data not in worlds: return
+  rospy.loginfo("destroy: %s", ID.data)
+  worlds[ID.data].destroy()
+  del worlds[ID.data]
+
+
+def create(ID): create_ids.append(ID)
+def destroy(ID): destroy_ids.append(ID)
 
 
 def run():
   rospy.init_node(config['config']['name'], anonymous=True)
-  rospy.Subscriber(config['config']['start'], String, start)
-  rospy.Subscriber(config['config']['stop'], String, stop)
+  rospy.Subscriber(config['config']['create_world'], String, create)
+  rospy.Subscriber(config['config']['destroy_world'], String, destroy)
 
-  rate = rospy.Rate(config['config']['rate'])
+  rate = rospy.Rate(1)
   while not rospy.is_shutdown():
-    for id in worldIDsToStart: world_controller.create(id)
-    for id in worldIDsToStop: world_controller.destroy(id)
-
-    del worldIDsToStart[:]
-    del worldIDsToStop[:]
-
-    world_controller.run()
+    for id in create_ids: create_world(id)
+    for id in destroy_ids: destroy_world(id)
+    del create_ids[:], destroy_ids[:]
     rate.sleep()
+
+  for id in worlds: worlds[id].destroy()
 
 
 if __name__ == '__main__': run()

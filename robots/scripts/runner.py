@@ -2,18 +2,23 @@
 
 import rospy
 import imp, os
+
 from node_manager.srv import *
+from node_manager.msg import *
 
 
 def ready(req):
-  return NumResponse(-7)
+  r = Reaction()
+  r.vx = -7
+
+  return RNodeResponse(r)
 
 
 def init():
   rospy.init_node('runner')
   rospy.loginfo(os.getcwd())
 
-  service = rospy.Service('ready', Num, ready)
+  service = rospy.Service('get_data', RNode, ready)
 
 
 init()

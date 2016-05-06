@@ -4,7 +4,7 @@ import os.path, json
 def convertXMLToObject(data): return objectify.fromstring(data)
 def convertJSONToObject(data): return json.loads(data)
 
-def loadObjectFromFile(name):
+def load(name):
   file = open(name, 'r'); data = file.read()
   fileName, fileExtension = os.path.splitext(name)
   return {
