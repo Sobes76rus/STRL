@@ -1,17 +1,17 @@
-from ros_object import ROSObject
 from os.path import join, isfile
 from config import config
 import converter
-from node import Node
-from r_node import RNode
 
+#from nodes.node import *
+from nodes.r_node import *
 
-class ActiveObject(ROSObject):
+from object import *
+
+class Robot(Object):
 
   def __init__(self, world, json):
-    ROSObject.__init__(self, world=world, json=json)
-    self.__robot = ActiveObject.by_name(json['name'])
-    self.namespace = '%s/%s' % (world.id, json['name'])
+    Object.__init__(self, world=world, json=json)
+    self.__robot = Robot.by_name(json['name'])
 
     for node_name in config['robots']['launch']:
       robo_path = join(config['root'], config['robots']['root'])
@@ -25,7 +25,7 @@ class ActiveObject(ROSObject):
 
       if isfile(join(src_path, file_name)):
         node = klass(obj=self, name=node_name, node_type='runner')
-        node.set_param('module', file_path)
+        node.set_param('~module', file_path)
         self.nodes.append(node)
 
     self.update_properties()

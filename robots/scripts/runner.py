@@ -18,7 +18,7 @@ def init():
   rospy.init_node('runner')
   rospy.loginfo(os.getcwd())
 
-  service = rospy.Service('get_data', RNode, ready)
+  service = rospy.Service('~get_data', RNode, ready)
 
 
 init()

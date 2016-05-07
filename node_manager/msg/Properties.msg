@@ -1,1 +1,3 @@
-geometry_msgs/Pose2D position
+Position position
+float32 radius
+string type

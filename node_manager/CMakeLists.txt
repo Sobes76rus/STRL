@@ -50,6 +50,7 @@ add_message_files(
   FILES
   Reaction.msg
   Properties.msg
+  Position.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -57,6 +58,8 @@ add_message_files(
   FILES
   RNode.srv
   EnvExecute.srv
+  WorldIds.srv
+  WorldProperties.srv
 )
 
 ## Generate actions in the 'action' folder

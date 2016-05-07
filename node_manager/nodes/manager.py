@@ -23,7 +23,7 @@ def create_world(ID):
 def destroy_world(ID):
   if ID.data not in worlds: return
   rospy.loginfo("destroy: %s", ID.data)
-  worlds[ID.data].destroy()
+  worlds[ID.data].destroy_synch()
   del worlds[ID.data]
 
 
@@ -42,8 +42,6 @@ def run():
     for id in destroy_ids: destroy_world(id)
     del create_ids[:], destroy_ids[:]
     rate.sleep()
-
-  for id in worlds: worlds[id].destroy()
 
 
 if __name__ == '__main__': run()
